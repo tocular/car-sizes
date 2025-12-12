@@ -1,0 +1,54 @@
+/* Custom styles for car size analysis report */
+
+iframe {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    margin: 1.5rem 0;
+    background-color: #fafafa;
+}
+
+.chart-container {
+    margin: 2rem 0;
+}
+
+h1, h2, h3 {
+    color: #2c3e50;
+}
+
+h2 {
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 0.5rem;
+    margin-top: 2.5rem;
+}
+
+.lead {
+    font-size: 1.15rem;
+    color: #555;
+    line-height: 1.7;
+}
+
+blockquote {
+    border-left: 4px solid #3498db;
+    padding-left: 1rem;
+    margin: 1.5rem 0;
+    color: #666;
+    font-style: italic;
+}
+
+.key-finding {
+    background-color: #f8f9fa;
+    border-left: 4px solid #28a745;
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 0 8px 8px 0;
+}
+
+.methodology-note {
+    background-color: #fff3cd;
+    border: 1px solid #ffc107;
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+}

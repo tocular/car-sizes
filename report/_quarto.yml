@@ -1,0 +1,12 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "Quantifying Car Size Through the Years"
+
+format:
+  html:
+    theme: lumen
+    css: styles.css
+    toc: true

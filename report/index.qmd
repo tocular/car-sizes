@@ -1,0 +1,73 @@
+---
+title: "Quantifying Car Size"
+subtitle: "A data-driven analysis of automotive dimensional trends"
+format:
+  html:
+    toc: true
+    css: styles.css
+---
+
+::: {.methodology-note}
+**Methodology Note:** This analysis uses dimensional data scraped from carsized.com, covering 2,312 vehicle models. Dimensions are measured in centimeters, weights in kilograms, and cargo volumes in liters. The dataset includes vehicles from multiple decades, though coverage is most comprehensive for models produced from 2000 onwards.
+:::
+
+## Introduction
+
+Cars have changed dramatically over the past several decades. Walk through any parking lot today and you will notice vehicles that seem considerably larger than their predecessors from the 1990s or early 2000s. But is this perception backed by data? And if cars are indeed getting bigger, is the trend uniform across all vehicle types, or are some categories growing faster than others?
+
+This analysis examines data from over 2,300 vehicle models spanning from the early 20th century to the present day. The dataset includes measurements for length, width, height, weight, wheelbase, and cargo volume across various body styles and market segments. 
+
+We begin with a brief overview of vehicle size trends in recent history, explore individual vehicle sizes relative to body segment benchmarks, and end with an analysis of dimensional similarity among vehicles in our sample. 
+
+
+## Have Car Sizes Trended Upwards Since the 1990s?
+
+The short answer is yes. Looking at the four key dimensions of length, width, height, and weight, all show consistent upward trajectories since 1990. Please note that the analysis below focuses primarily on vehicles produced from 1990 onwards---the sample sizes of vehicles from earlier decades are too small to merit inclusion.
+
+<div class="chart-container">
+<iframe src="http://localhost:8501" width="100%" height="650" frameborder="0"></iframe>
+</div>
+
+The visualization above tracks yearly averages for each dimension, with bubble sizes representing the number of vehicles in each year's sample. Use the body style filter to focus on specific vehicle categories. The dotted trendlines reveal the underlying growth patterns.
+
+**Length** has increased steadily, with the average vehicle growing by approximately 15-20 centimeters over three decades. This additional length accommodates larger crumple zones for improved crash safety, more spacious interiors, and the batteries required by hybrid and electric powertrains.
+
+**Width** shows perhaps the most consistent growth. Modern vehicles are noticeably wider than their 1990s counterparts, a change driven by side-impact protection requirements, wider wheelbases for improved handling, and consumer demand for more interior shoulder room.
+
+**Height** presents an interesting pattern. While there has been overall growth, this dimension shows more variability than length or width. The rise of SUVs and crossovers has pulled the average upward, but traditional sedans and coupes have maintained relatively consistent heights.
+
+![](cars_by_year_bodytype.png){fig-alt="SUVs account for a significant share of vehicles in our sample from the 2000s onwards."}
+
+**Weight** has increased substantially, despite advances in lightweight materials. The additional mass comes from safety equipment, sound insulation, battery systems in hybrid and electric vehicles, and a general increase in vehicle dimensions. In addition, the ubiquity of SUVs in our sample in recent years has pulled the average upwards. Hence, a typical vehicle today weighs several hundred kilograms more than its equivalent from the 1990s.
+
+The growth has not been uniform across body styles. **SUVs** have experienced the most dramatic expansion, with average length increasing by over 10% since the 1990s. **Sedans**, by contrast, have remained relatively stable, constrained by aerodynamic requirements and buyer preferences for efficiency. Use the body style filter above to explore how different vehicle categories have evolved.
+
+::: {.key-finding}
+**Key Finding:** All four primary metrics show significant upward trends since 1990, with width showing the most consistent year-over-year growth. SUVs and crossovers have expanded most dramatically, while sedans have remained relatively stable.
+:::
+
+## How Do Specific Cars Compare to Their Benchmarks?
+
+Understanding broad trends is valuable, but car buyers often want to know how a specific vehicle compares to its competitors. The radar chart below allows you to select any vehicle in the dataset and compare its dimensions against a customizable benchmark.
+
+<div class="chart-container">
+<iframe src="http://localhost:8502" width="100%" height="780" frameborder="0"></iframe>
+</div>
+
+The chart normalizes all dimensions to a 0-1 scale based on the full range of values in the dataset, making it possible to compare attributes that use different units. The shaded areas show how the selected vehicle's profile compares to the average of your chosen benchmark group.
+
+This tool proves particularly useful for understanding where a vehicle sits within its segment. A compact SUV might appear large by historical standards, but the radar chart can reveal whether it is actually larger or smaller than the current segment average.
+
+The benchmark filters allow you to narrow the comparison to specific decades, body styles, or market segments. You might compare a 2023 model year vehicle against the overall average, or restrict the comparison to premium vehicles from the 2010s and 2020s for a more targeted analysis.
+
+## Which Cars Are Most Similar?
+
+Sometimes the most useful comparison is not against an average, but against specific vehicles that share similar characteristics. The tool below identifies the five cars in our database that are most dimensionally similar to any vehicle you select.
+
+<div class="chart-container">
+<iframe src="http://localhost:8503" width="100%" height="670" frameborder="0"></iframe>
+</div>
+
+The similarity engine works by comparing six key attributes: length, width, height, wheelbase, weight, and cargo volume. Each attribute is standardized to ensure that no single dimension dominates the comparison. The algorithm then calculates the Euclidean distance between vehicles in this six-dimensional space, identifying cars that occupy nearby positions.
+
+A high similarity score indicates that two vehicles share comparable physical dimensions, regardless of their brand, body style, or market segment. This can reveal unexpected (or expected) connections. For example, four of the Audi e-tron GT's closest matches are variants of the Porsche Taycan, a car with which the Audi shares a platform. And the 2023 Mitsubishi Colt looks a lot like a rebadged Renault Clio (because it is).
