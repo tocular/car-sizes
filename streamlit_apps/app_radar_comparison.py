@@ -199,7 +199,7 @@ fig.update_layout(
         angularaxis=dict(
             gridcolor='lightgray'
         ),
-        bgcolor='rgba(250,250,250,0.8)'
+        bgcolor='#ffffff'
     ),
     showlegend=True,
     legend=dict(
