@@ -25,7 +25,7 @@ We begin with a brief overview of vehicle size trends in recent history, explore
 The short answer is yes. Looking at the four key dimensions of length, width, height, and weight, all show consistent upward trajectories since 1990. Please note that the analysis below focuses primarily on vehicles produced from 1990 onwards---the sample sizes of vehicles from earlier decades are too small to merit inclusion.
 
 <div class="chart-container">
-<iframe src="https://dimensiontrends.streamlit.app/?embed=true" width="100%" height="650" frameborder="0"></iframe>
+<iframe src="https://dimensiontrends.streamlit.app/?embed=true" width="100%" height="720" frameborder="0"></iframe>
 </div>
 
 The visualization above tracks yearly averages for each dimension, with bubble sizes representing the number of vehicles in each year's sample. Use the body style filter to focus on specific vehicle categories. The dotted trendlines reveal the underlying growth patterns.
