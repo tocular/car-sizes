@@ -132,6 +132,8 @@ with image_placeholder.container():
     with col_img:
         display_car_image(selected_car_img)
 
+st.markdown("<br>", unsafe_allow_html=True)
+
 # Get similar cars
 similar_cars, similarities = get_similar_cars(selected_car, n_recommendations=5)
 
