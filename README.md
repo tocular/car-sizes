@@ -2,6 +2,8 @@
 
 An analysis of automotive dimensional trends using data from carsized.com, covering 2,300+ vehicle models.
 
+Link: https://tocular.github.io/car-sizes/
+
 ## Overview
 
 This project examines how car dimensions have changed over time. The analysis includes:
