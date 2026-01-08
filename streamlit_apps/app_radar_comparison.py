@@ -201,6 +201,8 @@ fig.update_layout(
         ),
         bgcolor='#ffffff'
     ),
+    paper_bgcolor='#ffffff',
+    plot_bgcolor='#ffffff',
     showlegend=True,
     legend=dict(
         orientation='h',
