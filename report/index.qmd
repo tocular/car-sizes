@@ -25,7 +25,7 @@ We begin with a brief overview of vehicle size trends in recent history, explore
 The short answer is yes. Looking at the four key dimensions of length, width, height, and weight, all show consistent upward trajectories since 1990. Please note that the analysis below focuses primarily on vehicles produced from 1990 onwards---the sample sizes of vehicles from earlier decades are too small to merit inclusion.
 
 <div class="chart-container">
-<iframe src="https://dimensiontrends.streamlit.app/" width="100%" height="650" frameborder="0"></iframe>
+<iframe src="https://dimensiontrends.streamlit.app/?embed=true" width="100%" height="650" frameborder="0"></iframe>
 </div>
 
 The visualization above tracks yearly averages for each dimension, with bubble sizes representing the number of vehicles in each year's sample. Use the body style filter to focus on specific vehicle categories. The dotted trendlines reveal the underlying growth patterns.
@@ -51,7 +51,7 @@ The growth has not been uniform across body styles. **SUVs** have experienced th
 Understanding broad trends is valuable, but car buyers often want to know how a specific vehicle compares to its competitors. The radar chart below allows you to select any vehicle in the dataset and compare its dimensions against a customizable benchmark.
 
 <div class="chart-container">
-<iframe src="https://radarcomparison.streamlit.app/" width="100%" height="780" frameborder="0"></iframe>
+<iframe src="https://radarcomparison.streamlit.app/?embed=true" width="100%" height="780" frameborder="0"></iframe>
 </div>
 
 The chart normalizes all dimensions to a 0-1 scale based on the full range of values in the dataset, making it possible to compare attributes that use different units. The shaded areas show how the selected vehicle's profile compares to the average of your chosen benchmark group.
@@ -65,7 +65,7 @@ The benchmark filters allow you to narrow the comparison to specific decades, bo
 Sometimes the most useful comparison is not against an average, but against specific vehicles that share similar characteristics. The tool below identifies the five cars in our database that are most dimensionally similar to any vehicle you select.
 
 <div class="chart-container">
-<iframe src="https://similarcars.streamlit.app/" width="100%" height="670" frameborder="0"></iframe>
+<iframe src="https://similarcars.streamlit.app/?embed=true" width="100%" height="670" frameborder="0"></iframe>
 </div>
 
 The similarity engine works by comparing six key attributes: length, width, height, wheelbase, weight, and cargo volume. Each attribute is standardized to ensure that no single dimension dominates the comparison. The algorithm then calculates the Euclidean distance between vehicles in this six-dimensional space, identifying cars that occupy nearby positions.
