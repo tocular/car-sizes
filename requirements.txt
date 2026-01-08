@@ -4,5 +4,3 @@ pandas
 scipy
 numpy
 scikit-learn
-httpx
-selectolax

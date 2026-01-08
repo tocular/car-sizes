@@ -7,13 +7,13 @@ import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
 import numpy as np
-import httpx
-from selectolax.parser import HTMLParser
+import json
 from pathlib import Path
 
 # Get the directory where this script is located
 SCRIPT_DIR = Path(__file__).parent.resolve()
 DATA_PATH = SCRIPT_DIR.parent / "tables" / "carsized_data_clean.csv"
+IMAGE_URLS_PATH = SCRIPT_DIR.parent / "tables" / "car_image_urls.json"
 
 st.set_page_config(layout="wide", initial_sidebar_state="collapsed")
 
@@ -28,13 +28,15 @@ header {visibility: hidden;}
 """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
-# Load data
+# Load data and pre-scraped image URLs
 @st.cache_data
 def load_data():
     df = pd.read_csv(DATA_PATH)
-    return df
+    with open(IMAGE_URLS_PATH, 'r') as f:
+        image_urls = json.load(f)
+    return df, image_urls
 
-df = load_data()
+df, IMAGE_URLS = load_data()
 
 # Attributes for radar chart
 attributes = ['length', 'width', 'height', 'wheelbase', 'weight', 'cargo_volume']
@@ -56,43 +58,26 @@ def normalize_value(value, attr):
     stats = global_stats[attr]
     return (value - stats['min']) / (stats['max'] - stats['min'])
 
-# Function to get car image from carsized.com
-@st.cache_data(ttl=3600)
-def get_car_image(url):
-    """Scrape car thumbnail image from carsized.com page."""
-    try:
-        headers = {
-            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-            "Accept-Language": "en-US,en;q=0.5",
-            "Accept-Encoding": "gzip, deflate, br",
-            "Referer": "https://www.carsized.com/",
-            "Connection": "keep-alive",
-        }
-        response = httpx.get(url, headers=headers, timeout=10, follow_redirects=True)
-        response.raise_for_status()
+# Look up car image URL from pre-scraped data
+def get_car_image(page_url):
+    """Get car image URL from pre-scraped data."""
+    return IMAGE_URLS.get(page_url)
 
-        tree = HTMLParser(response.text)
 
-        # Find the main car image - look for img with side-view in src
-        for img in tree.css('img'):
-            src = img.attributes.get('src', '')
-            if 'side-view' in src or '/resources/' in src:
-                if src.startswith('/'):
-                    return f"https://www.carsized.com{src}"
-                return src
-
-        # Fallback: find any img in the car display area
-        for img in tree.css('img'):
-            src = img.attributes.get('src', '')
-            if '/resources/' in src and '.png' in src:
-                if src.startswith('/'):
-                    return f"https://www.carsized.com{src}"
-                return src
-
-        return None
-    except (httpx.RequestError, httpx.HTTPStatusError):
-        return None
+def display_car_image(img_url, fallback_text="No image"):
+    """Display car image using client-side loading (bypasses cloud IP blocks)."""
+    if img_url:
+        st.markdown(
+            f'<img src="{img_url}" style="width: 100%; border-radius: 8px;">',
+            unsafe_allow_html=True
+        )
+    else:
+        st.markdown(
+            f"""<div style="background-color: #f0f0f0; height: 80px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 8px; color: #888;">{fallback_text}</div>""",
+            unsafe_allow_html=True
+        )
 
 # Create placeholder for image (will be filled after selection)
 image_placeholder = st.empty()
@@ -114,11 +99,10 @@ selected_car = selected_car_df.iloc[0]
 
 # Display selected car image in placeholder (left-aligned, 1/2 size of recommendation images)
 selected_car_img = get_car_image(selected_car['url'])
-if selected_car_img:
-    with image_placeholder.container():
-        col_img, col_empty = st.columns([1, 9])
-        with col_img:
-            st.image(selected_car_img, width='stretch')
+with image_placeholder.container():
+    col_img, col_empty = st.columns([1, 9])
+    with col_img:
+        display_car_image(selected_car_img)
 
 # Benchmark filters in expandable dropdown
 with st.expander("Benchmark Filters"):
