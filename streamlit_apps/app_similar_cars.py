@@ -18,13 +18,14 @@ IMAGE_URLS_PATH = SCRIPT_DIR.parent / "tables" / "car_image_urls.json"
 
 st.set_page_config(layout="wide", initial_sidebar_state="collapsed")
 
-# Hide Streamlit chrome for cleaner embedding
+# Hide Streamlit chrome and set dark theme
 hide_streamlit_style = """
 <style>
 #MainMenu {visibility: hidden;}
 footer {visibility: hidden;}
 header {visibility: hidden;}
 .block-container {padding-top: 1rem; padding-bottom: 1rem;}
+.stApp {background-color: #000000;}
 </style>
 """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
@@ -75,7 +76,7 @@ def display_car_image(img_url, fallback_text="No image"):
         )
     else:
         st.markdown(
-            f"""<div style="background-color: #f0f0f0; height: 80px;
+            f"""<div style="background-color: #1a1a1a; height: 80px;
             display: flex; align-items: center; justify-content: center;
             border-radius: 8px; color: #888;">{fallback_text}</div>""",
             unsafe_allow_html=True
@@ -159,7 +160,7 @@ if similar_cars is not None and len(similar_cars) > 0:
         idx, car = cars_list[i]
         with cols_row1[col_idx]:
             years = f"({int(car['production_start'])}-{car['production_end_display']})"
-            st.markdown(f"<div style='text-align: center; color: #666; font-size: 0.9em;'>{years}</div>", unsafe_allow_html=True)
+            st.markdown(f"<div style='text-align: center; color: #999; font-size: 0.9em;'>{years}</div>", unsafe_allow_html=True)
 
     # Row 1: Similarity scores (centered)
     cols_row1 = st.columns([0.5, 1, 0.5, 1, 0.5, 1, 0.5])
@@ -167,7 +168,7 @@ if similar_cars is not None and len(similar_cars) > 0:
         idx, car = cars_list[i]
         with cols_row1[col_idx]:
             st.markdown(
-                f"<div style='text-align: center; font-size: 1.2em; color: #2e7d32; font-weight: bold;'>"
+                f"<div style='text-align: center; font-size: 1.2em; color: #4caf50; font-weight: bold;'>"
                 f"{car['similarity']:.1f}% similar</div>",
                 unsafe_allow_html=True
             )
@@ -195,7 +196,7 @@ if similar_cars is not None and len(similar_cars) > 0:
         idx, car = cars_list[3 + i]
         with cols_row2[col_idx]:
             years = f"({int(car['production_start'])}-{car['production_end_display']})"
-            st.markdown(f"<div style='text-align: center; color: #666; font-size: 0.9em;'>{years}</div>", unsafe_allow_html=True)
+            st.markdown(f"<div style='text-align: center; color: #999; font-size: 0.9em;'>{years}</div>", unsafe_allow_html=True)
 
     # Row 2: Similarity scores (centered)
     cols_row2 = st.columns([1, 1, 0.5, 1, 1])
@@ -203,7 +204,7 @@ if similar_cars is not None and len(similar_cars) > 0:
         idx, car = cars_list[3 + i]
         with cols_row2[col_idx]:
             st.markdown(
-                f"<div style='text-align: center; font-size: 1.2em; color: #2e7d32; font-weight: bold;'>"
+                f"<div style='text-align: center; font-size: 1.2em; color: #4caf50; font-weight: bold;'>"
                 f"{car['similarity']:.1f}% similar</div>",
                 unsafe_allow_html=True
             )

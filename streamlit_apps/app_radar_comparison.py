@@ -17,13 +17,14 @@ IMAGE_URLS_PATH = SCRIPT_DIR.parent / "tables" / "car_image_urls.json"
 
 st.set_page_config(layout="wide", initial_sidebar_state="collapsed")
 
-# Hide Streamlit chrome for cleaner embedding
+# Hide Streamlit chrome and set dark theme
 hide_streamlit_style = """
 <style>
 #MainMenu {visibility: hidden;}
 footer {visibility: hidden;}
 header {visibility: hidden;}
 .block-container {padding-top: 1rem; padding-bottom: 1rem;}
+.stApp {background-color: #000000;}
 </style>
 """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
@@ -73,7 +74,7 @@ def display_car_image(img_url, fallback_text="No image"):
         )
     else:
         st.markdown(
-            f"""<div style="background-color: #f0f0f0; height: 80px;
+            f"""<div style="background-color: #1a1a1a; height: 80px;
             display: flex; align-items: center; justify-content: center;
             border-radius: 8px; color: #888;">{fallback_text}</div>""",
             unsafe_allow_html=True
@@ -194,20 +195,26 @@ fig.update_layout(
             range=[0, 1],
             tickvals=[0.25, 0.5, 0.75, 1],
             ticktext=['25%', '50%', '75%', '100%'],
-            gridcolor='lightgray'
+            gridcolor='#333333',
+            tickfont=dict(color='#ffffff')
         ),
         angularaxis=dict(
-            gridcolor='lightgray'
+            gridcolor='#333333',
+            tickfont=dict(color='#ffffff')
         ),
-        bgcolor='rgba(250,250,250,0.8)'
+        bgcolor='#000000'
     ),
+    paper_bgcolor='#000000',
+    plot_bgcolor='#000000',
+    font=dict(color='#ffffff'),
     showlegend=True,
     legend=dict(
         orientation='h',
         yanchor='bottom',
         y=-0.15,
         xanchor='center',
-        x=0.5
+        x=0.5,
+        font=dict(color='#ffffff')
     ),
     height=500,
     margin=dict(l=80, r=80, t=40, b=80)

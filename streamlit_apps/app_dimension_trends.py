@@ -17,18 +17,18 @@ DATA_PATH = SCRIPT_DIR.parent / "tables" / "carsized_data_clean.csv"
 
 st.set_page_config(layout="wide", initial_sidebar_state="collapsed")
 
-# Hide Streamlit chrome and set light theme
+# Hide Streamlit chrome and set dark theme
 hide_streamlit_style = """
 <style>
 #MainMenu {visibility: hidden;}
 footer {visibility: hidden;}
 header {visibility: hidden;}
 .block-container {padding-top: 1rem; padding-bottom: 1rem;}
-.stApp {background-color: #ffffff;}
+.stApp {background-color: #000000;}
 
 /* Make labels more visible */
 .stSlider label, .stMultiSelect label {
-    color: #333333 !important;
+    color: #ffffff !important;
     font-weight: 500 !important;
 }
 
@@ -158,24 +158,24 @@ for dim, row, col, color in dimensions:
         row=row, col=col
     )
 
-# Update layout - light theme, no title, more top margin for subplot titles
+# Update layout - dark theme, no title, more top margin for subplot titles
 fig.update_layout(
     height=550,
     margin=dict(l=60, r=30, t=40, b=50),
-    font=dict(size=13, color='#333333'),
-    plot_bgcolor='white',
-    paper_bgcolor='white'
+    font=dict(size=13, color='#ffffff'),
+    plot_bgcolor='#000000',
+    paper_bgcolor='#000000'
 )
 
 # Update subplot title positions to add space below them and make them bold
 for annotation in fig['layout']['annotations']:
     annotation['y'] = annotation['y'] + 0.02
-    annotation['font'] = dict(size=14, color='#333333', weight=700)
+    annotation['font'] = dict(size=14, color='#ffffff', weight=700)
 
 # Update axes with more visible fonts
-fig.update_xaxes(title_text='Production Year', title_font=dict(size=12, color='#333333'), row=2, col=1)
-fig.update_xaxes(title_text='Production Year', title_font=dict(size=12, color='#333333'), row=2, col=2)
-fig.update_yaxes(gridcolor='lightgray', gridwidth=0.5, tickfont=dict(size=11, color='#333333'))
-fig.update_xaxes(gridcolor='lightgray', gridwidth=0.5, tickfont=dict(size=11, color='#333333'))
+fig.update_xaxes(title_text='Production Year', title_font=dict(size=12, color='#ffffff'), row=2, col=1)
+fig.update_xaxes(title_text='Production Year', title_font=dict(size=12, color='#ffffff'), row=2, col=2)
+fig.update_yaxes(gridcolor='#333333', gridwidth=0.5, tickfont=dict(size=11, color='#ffffff'))
+fig.update_xaxes(gridcolor='#333333', gridwidth=0.5, tickfont=dict(size=11, color='#ffffff'))
 
 st.plotly_chart(fig, width='stretch')
